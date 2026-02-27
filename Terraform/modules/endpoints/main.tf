@@ -1,4 +1,3 @@
-# S3 Gateway Endpoint
 resource "aws_vpc_endpoint" "s3" {
   vpc_id            = var.vpc_id
   service_name      = "com.amazonaws.eu-west-2.s3"
@@ -10,7 +9,6 @@ resource "aws_vpc_endpoint" "s3" {
   }
 }
 
-# ECR API Endpoint
 resource "aws_vpc_endpoint" "ecr_api" {
   vpc_id              = var.vpc_id
   service_name        = "com.amazonaws.eu-west-2.ecr.api"
@@ -24,7 +22,6 @@ resource "aws_vpc_endpoint" "ecr_api" {
   }
 }
 
-# ECR Docker Endpoint
 resource "aws_vpc_endpoint" "ecr_dkr" {
   vpc_id              = var.vpc_id
   service_name        = "com.amazonaws.eu-west-2.ecr.dkr"
@@ -38,7 +35,6 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   }
 }
 
-# CloudWatch Logs Endpoint
 resource "aws_vpc_endpoint" "logs" {
   vpc_id              = var.vpc_id
   service_name        = "com.amazonaws.eu-west-2.logs"
@@ -52,7 +48,6 @@ resource "aws_vpc_endpoint" "logs" {
   }
 }
 
-# STS Endpoint 
 resource "aws_vpc_endpoint" "sts" {
   vpc_id              = var.vpc_id
   service_name        = "com.amazonaws.eu-west-2.sts"

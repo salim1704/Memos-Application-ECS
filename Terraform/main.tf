@@ -1,11 +1,9 @@
-# ECR Repository
 module "ecr" {
   source = "./modules/ecr"
 
   repository_name = "abdulqayoom-registry"
 }
 
-# VPC Module
 module "vpc" {
   source = "./modules/vpc"
 
@@ -15,7 +13,6 @@ module "vpc" {
   region         = var.region
 }
 
-# Security Groups Module
 module "security_groups" {
   source = "./modules/security_groups"
 
@@ -23,7 +20,6 @@ module "security_groups" {
   vpc_cidr_block = var.vpc_cidr_block
 }
 
-# VPC Endpoints Module
 module "endpoints" {
   source = "./modules/endpoints"
 
@@ -34,14 +30,12 @@ module "endpoints" {
   vpc_endpoint_sg_id      = module.security_groups.vpc_endpoint_sg_id
 }
 
-# ACM Module
 module "acm" {
   source = "./modules/acm"
 
   domain_name = var.domain_name
 }
 
-# ALB Module
 module "alb" {
   source = "./modules/alb"
 
@@ -51,12 +45,12 @@ module "alb" {
   certificate_arn  = module.acm.certificate_arn
 }
 
-# IAM Module
+
 module "iam" {
   source = "./modules/iam"
 }
 
-# Route 53 Module
+
 module "route53" {
   source = "./modules/route53"
 
@@ -65,7 +59,6 @@ module "route53" {
   alb_zone_id  = module.alb.alb_zone_id
 }
 
-# ECS Module
 module "ecs" {
   source = "./modules/ecs"
 

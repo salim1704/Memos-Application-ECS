@@ -1,4 +1,3 @@
-# Endpoints Security Group
 resource "aws_security_group" "endpoint_sg" {
   name        = "endpoint_sg"
   description = "Security group for VPC endpoints"
@@ -25,7 +24,6 @@ resource "aws_security_group" "endpoint_sg" {
   }
 }
 
-# ALB Security Group
 resource "aws_security_group" "alb_sg" {
   name        = "alb_sg"
   description = "Security group for ALB"
@@ -60,7 +58,6 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# ECS Task Security Group
 resource "aws_security_group" "ecs_task_sg" {
   name        = "ecs-task-sg"
   description = "Security group for ECS tasks"
