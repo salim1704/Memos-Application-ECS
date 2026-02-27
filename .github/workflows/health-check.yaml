@@ -44,4 +44,4 @@ jobs:
 
       - name: Summary
         if: success()
-        run: echo "✅ Health check complete (200 OK)"
+        run: echo "Health check complete (200 OK)"
