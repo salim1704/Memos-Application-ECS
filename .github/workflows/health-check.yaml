@@ -11,37 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Wait for deployment
         run: sleep 60
 
       - name: Health Check
-        run: |
-          echo "Running health check..."
-
-          max_attempts=10
-          attempt=1
-
-          while [ $attempt -le $max_attempts ]; do
-            response=$(curl -sS -m 10 -o /dev/null -w "%{http_code}" https://tm.abdulqayoom.co.uk/healthz || echo "000")
-
-            if [ "$response" = "200" ]; then
-              echo "Health check passed!"
-              exit 0
-            fi
-
-            echo "Attempt $attempt/$max_attempts failed (HTTP $response)"
-
-            if [ $attempt -lt $max_attempts ]; then
-              echo "Retrying in 30s..."
-              sleep 30
-            fi
-
-            attempt=$((attempt + 1))
-          done
-
-          echo "Health check failed after $max_attempts attempts"
-          exit 1
-
+        run: bash scripts/health-check.sh
+          
       - name: Summary
         if: success()
         run: echo "Health check complete (200 OK)"
