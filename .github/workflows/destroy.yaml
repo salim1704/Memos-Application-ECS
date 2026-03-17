@@ -54,9 +54,9 @@ jobs:
         run: |
             count=$(terraform state list 2>/dev/null | wc -l | tr -d ' ')
             if [ "$count" -eq 0 ]; then
-              echo "✅ All Terraform-managed resources destroyed"
+              echo "All Terraform-managed resources destroyed"
             else
-              echo "❌ $count Terraform-managed resources remain"
+              echo "$count Terraform-managed resources remain"
               terraform state list || true
               exit 1
             fi
