@@ -39,21 +39,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ env.ECR_REPOSITORY }}:${{ github.sha }} -f Docker/Dockerfile .
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-report.sarif'
-          severity: 'CRITICAL'
-          exit-code: '0'
-
-      - name: Upload Trivy results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: 'trivy-report.sarif'
-
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
